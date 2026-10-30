@@ -20,6 +20,8 @@ import {
   Fuel,
   History,
   FileCheck2,
+  Globe,
+  Radio,
 } from "lucide-react";
 import AllowanceGuardArtifact from "@/contracts/AllowanceGuard.json";
 
@@ -33,10 +35,10 @@ const ERC20_ABI = parseAbi([
   "function approve(address spender, uint256 amount) returns (bool)",
 ]);
 
-const EXPLORER_URL = process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.bohr.life";
-// Deployed AllowanceGuard on Bohr Testnet
+const EXPLORER_URL = process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.botchain.ai";
+// Deployed AllowanceGuard on BOT Chain Mainnet
 const GUARD_CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
-  "0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03") as `0x${string}`;
+  "0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF") as `0x${string}`;
 
 interface CheckRecordItem {
   token: string;
@@ -137,7 +139,7 @@ export default function Home() {
       refetchAllowance();
       refetchHistory();
       setIsErrorStatus(false);
-      setStatusMessage("✅ Check transaction confirmed on Bohr Testnet! Gas fee paid. Results revealed below.");
+      setStatusMessage("✅ Check transaction confirmed on BOT Chain! Gas fee paid. Results revealed below.");
     }
   }, [isRecordSuccess, refetchAllowance, refetchHistory]);
 
@@ -147,7 +149,7 @@ export default function Home() {
       refetchAllowance();
       refetchHistory();
       setIsErrorStatus(false);
-      setStatusMessage("✅ Approval successfully revoked to 0! Gas fee paid on Bohr Testnet.");
+      setStatusMessage("✅ Approval successfully revoked to 0! Gas fee paid on BOT Chain.");
     }
   }, [isRevokeSuccess, refetchAllowance, refetchHistory]);
 
@@ -185,7 +187,7 @@ export default function Home() {
 
     setCheckConfirmed(false);
     setIsErrorStatus(false);
-    setStatusMessage("Please confirm the check transaction in your wallet to pay the gas fee...");
+    setStatusMessage("Please confirm the check transaction in your wallet to pay the gas fee (BOT)...");
 
     // Submit state-changing transaction to AllowanceGuard contract
     writeRecordCheck({
@@ -241,19 +243,52 @@ export default function Home() {
               borderRadius: "14px",
               objectFit: "cover",
               boxShadow: "0 0 15px rgba(0, 240, 255, 0.4)",
-              border: "1px solid rgba(0, 240, 255, 0.3)"
+              border: "1px solid rgba(0, 240, 255, 0.3)",
             }}
           />
           <div>
             <div className="logo-title">AllowanceGuard</div>
             <div className="network-badge">
               <span className="network-pulse"></span>
-              Bohr Testnet (Chain ID: 968)
+              BOT Chain (Chain ID: 677)
             </div>
           </div>
         </div>
 
-        <div>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.85rem", flexWrap: "wrap" }}>
+          {/* Quick Header Nav Links with Original BOT Chain Logo */}
+          <a
+            href="https://botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="botchain-nav-link"
+            title="BOT Chain Official Website"
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: "18px", height: "18px", borderRadius: "50%" }}
+            />
+            <span>https://botchain.ai</span>
+            <ExternalLink size={12} />
+          </a>
+
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            className="botchain-nav-link"
+            title="BOT Chain Explorer"
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: "18px", height: "18px", borderRadius: "50%" }}
+            />
+            <span>https://scan.botchain.ai</span>
+            <ExternalLink size={12} />
+          </a>
+
           <button
             className="btn-primary"
             style={{ width: "auto", padding: "0.6rem 1.25rem", fontSize: "0.9rem" }}
@@ -266,13 +301,65 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Prominent Official BOT Chain Resource Banner with original logo in front */}
+      <div className="botchain-links-container">
+        <a
+          href="https://botchain.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="botchain-link-item"
+        >
+          <img
+            src="/botchain-logo.png"
+            alt="BOT Chain Logo"
+            className="botchain-logo-icon"
+          />
+          <span>https://botchain.ai</span>
+          <ExternalLink size={14} style={{ color: "var(--accent-cyan)", marginLeft: "4px" }} />
+        </a>
+
+        <a
+          href="https://scan.botchain.ai"
+          target="_blank"
+          rel="noreferrer"
+          className="botchain-link-item"
+        >
+          <img
+            src="/botchain-logo.png"
+            alt="BOT Chain Logo"
+            className="botchain-logo-icon"
+          />
+          <span>https://scan.botchain.ai</span>
+          <ExternalLink size={14} style={{ color: "var(--accent-cyan)", marginLeft: "4px" }} />
+        </a>
+
+        <a
+          href={`https://scan.botchain.ai/address/${GUARD_CONTRACT_ADDRESS}#code`}
+          target="_blank"
+          rel="noreferrer"
+          className="botchain-link-item"
+          style={{ borderColor: "rgba(16, 185, 129, 0.4)" }}
+        >
+          <img
+            src="/botchain-logo.png"
+            alt="BOT Chain Logo"
+            className="botchain-logo-icon"
+          />
+          <span style={{ color: "var(--status-safe)" }}>Verified Contract:</span>
+          <span style={{ fontFamily: "var(--font-geist-mono)", fontSize: "0.85rem" }}>
+            {GUARD_CONTRACT_ADDRESS.slice(0, 6)}...{GUARD_CONTRACT_ADDRESS.slice(-4)}
+          </span>
+          <ExternalLink size={14} style={{ color: "var(--status-safe)" }} />
+        </a>
+      </div>
+
       {/* Hero Section */}
       <section className="hero">
         <h1>
           Token Approval Checker &amp; <span>Audit Guard</span>
         </h1>
         <p>
-          Inspect which smart contracts have permission to spend your tokens on Bohr Testnet.
+          Inspect which smart contracts have permission to spend your tokens on <strong>BOT Chain</strong> (Native Token: BOT, Chain ID: 677).
           Record checks on-chain through a verifiable transaction, and revoke dangerous
           unlimited approvals with 1 click.
         </p>
@@ -282,13 +369,13 @@ export default function Home() {
       <div className="info-banner" style={{ borderColor: "rgba(0, 240, 255, 0.3)" }}>
         <Fuel size={22} color="#00f0ff" style={{ flexShrink: 0, marginTop: "2px" }} />
         <div>
-          <strong>Gas Fee Architecture:</strong>
+          <strong>Gas Fee Architecture on BOT Chain:</strong>
           <ul style={{ paddingLeft: "1.2rem", marginTop: "0.4rem", lineHeight: 1.6 }}>
             <li>
-              <strong>Checking an allowance requires gas:</strong> Clicking <em>Check Allowance</em> submits a transaction to <code>AllowanceGuard.recordCheck()</code> on Bohr Testnet to record your audit on-chain before displaying results.
+              <strong>Checking an allowance requires small gas:</strong> Clicking <em>Check Allowance</em> submits an audit record to <code>AllowanceGuard.recordCheck()</code> on BOT Chain to log your verification on-chain.
             </li>
             <li>
-              <strong>Revoking requires its own gas fee:</strong> Calling <code>approve(spender, 0)</code> directly on the ERC-20 contract is a separate transaction with its own gas fee.
+              <strong>Revoking requires its own small gas fee:</strong> Calling <code>approve(spender, 0)</code> directly on the ERC-20 contract is a separate transaction paying standard minimal BOT gas.
             </li>
           </ul>
         </div>
@@ -304,7 +391,7 @@ export default function Home() {
           <div className="input-wrapper">
             <input
               type="text"
-              placeholder="0x... (Token Contract on Bohr Testnet)"
+              placeholder="0x... (ERC-20 Token Contract on BOT Chain)"
               className="input-field"
               value={tokenAddress}
               onChange={(e) => {
@@ -318,11 +405,11 @@ export default function Home() {
               type="button"
               className="pill-btn"
               onClick={() => {
-                setTokenAddress("0xeAF13A23013d0D541f2De76625F562Ca858Fe7D4");
+                setTokenAddress("0xD5452816194a3784dBa983426cCe7c122F4abd30");
                 setCheckConfirmed(false);
               }}
             >
-              ⚡ Test Token (BGUSD: 0xeAF1...e7D4)
+              🤖 BOT Token Contract (0xD545...bd30)
             </button>
           </div>
         </div>
@@ -349,11 +436,11 @@ export default function Home() {
               type="button"
               className="pill-btn"
               onClick={() => {
-                setSpenderAddress("0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03");
+                setSpenderAddress(GUARD_CONTRACT_ADDRESS);
                 setCheckConfirmed(false);
               }}
             >
-              🛡️ AllowanceGuard Spender (0xa2dE...1f03)
+              🛡️ AllowanceGuard Contract ({GUARD_CONTRACT_ADDRESS.slice(0, 6)}...{GUARD_CONTRACT_ADDRESS.slice(-4)})
             </button>
             <button
               type="button"
@@ -377,17 +464,17 @@ export default function Home() {
           {isRecording ? (
             <>
               <RefreshCw size={18} className="animate-spin" />
-              Confirm in Wallet (Sign Gas Fee)...
+              Confirm in Wallet (Sign BOT Gas Fee)...
             </>
           ) : isWaitingRecord ? (
             <>
               <RefreshCw size={18} className="animate-spin" />
-              Mining Check on Bohr Testnet...
+              Mining Check on BOT Chain...
             </>
           ) : (
             <>
               <Zap size={18} />
-              Check Allowance (Requires Gas Fee)
+              Check Allowance (Requires Small Gas Fee)
             </>
           )}
         </button>
@@ -481,7 +568,7 @@ export default function Home() {
 
             <div className="result-row">
               <span style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-                Spender on BohrScan
+                Spender on BotScan
               </span>
               <a
                 href={`${EXPLORER_URL}/address/${spenderAddress}`}
@@ -496,7 +583,7 @@ export default function Home() {
                   textDecoration: "underline",
                 }}
               >
-                View Spender <ExternalLink size={14} />
+                View Spender on BotScan <ExternalLink size={14} />
               </a>
             </div>
 
@@ -513,9 +600,9 @@ export default function Home() {
                   {isRevoking ? (
                     "Confirming in Wallet (Separate Gas Fee)..."
                   ) : isWaitingRevoke ? (
-                    "Mining Revocation on Bohr Testnet..."
+                    "Mining Revocation on BOT Chain..."
                   ) : (
-                    "Revoke Approval (Costs Gas Fee)"
+                    "Revoke Approval (Costs Small Gas Fee)"
                   )}
                 </button>
               </div>
@@ -562,7 +649,7 @@ export default function Home() {
           <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "1rem" }}>
             <History size={20} color="#00f0ff" />
             <h2 style={{ fontSize: "1.3rem", fontWeight: 700 }}>
-              Your On-Chain Check Audit Trail
+              Your On-Chain Check Audit Trail (BOT Chain)
             </h2>
           </div>
 
@@ -650,12 +737,84 @@ export default function Home() {
             <h3 style={{ fontSize: "1.1rem" }}>Gas Fees &amp; On-Chain Verification</h3>
           </div>
           <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
-            The allowance check incurs a small gas fee on Bohr Testnet to write the audit record into
+            The allowance check incurs a small gas fee on BOT Chain to write the audit record into{" "}
             <code>AllowanceGuard</code>. If you decide to revoke, submitting <code>approve(spender, 0)</code>{" "}
             requires its own separate transaction and gas fee.
           </p>
         </div>
       </div>
+
+      {/* Footer with BOT Chain official links and logo */}
+      <footer
+        style={{
+          marginTop: "4rem",
+          paddingTop: "2rem",
+          borderTop: "1px solid var(--border-subtle)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.25rem",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "var(--text-secondary)",
+          fontSize: "0.9rem",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+          <a
+            href="https://botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              color: "var(--text-primary)",
+              textDecoration: "none",
+              padding: "0.4rem 0.8rem",
+              borderRadius: "8px",
+              background: "rgba(255, 255, 255, 0.04)",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+            }}
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+            />
+            <span>https://botchain.ai</span>
+            <ExternalLink size={13} style={{ color: "var(--accent-cyan)" }} />
+          </a>
+
+          <a
+            href="https://scan.botchain.ai"
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              color: "var(--text-primary)",
+              textDecoration: "none",
+              padding: "0.4rem 0.8rem",
+              borderRadius: "8px",
+              background: "rgba(255, 255, 255, 0.04)",
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+            }}
+          >
+            <img
+              src="/botchain-logo.png"
+              alt="BOT Chain Logo"
+              style={{ width: "20px", height: "20px", borderRadius: "50%" }}
+            />
+            <span>https://scan.botchain.ai</span>
+            <ExternalLink size={13} style={{ color: "var(--accent-cyan)" }} />
+          </a>
+        </div>
+
+        <div style={{ textAlign: "center", fontSize: "0.82rem", color: "var(--text-muted)" }}>
+          Powered by <strong>BOT Chain</strong> (Chain ID: 677 | Native Token: BOT) &bull; AllowanceGuard On-Chain Security
+        </div>
+      </footer>
     </div>
   );
 }

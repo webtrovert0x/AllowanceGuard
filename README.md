@@ -4,7 +4,7 @@
 
 <h1 align="center">AllowanceGuard</h1>
 <p align="center">
-  <strong>On-Chain Token Approval Auditing & Risk Mitigation Protocol on Bohr Testnet</strong>
+  <strong>On-Chain Token Approval Auditing & Risk Mitigation Protocol on BOT Chain</strong>
 </p>
 
 <p align="center">
@@ -15,7 +15,7 @@
 
 ## ⚡ Overview
 
-**AllowanceGuard** is a Web3 security protocol and decentralized application built for the **Bohr Testnet**. It enables users to:
+**AllowanceGuard** is a Web3 security protocol and decentralized application built for **BOT Chain**. It enables users to:
 - Inspect which smart contracts have permission to spend their ERC-20 tokens.
 - Identify dangerous **Unlimited Allowances** ($\ge 2^{255}$).
 - Record audit verifications on-chain in `AllowanceGuard.sol` for an immutable security log.
@@ -23,12 +23,24 @@
 
 ---
 
-## 📍 Deployed Contracts (Bohr Testnet - Chain ID: 968)
+## 🌐 BOT Chain Network Information
 
-| Contract | Address | Explorer Link |
-| :--- | :--- | :--- |
-| **AllowanceGuard** | `0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03` | [View on BohrScan](https://scan.bohr.life/address/0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03) |
-| **MockERC20 (BGUSD)** | `0xeAF13A23013d0D541f2De76625F562Ca858Fe7D4` | [View on BohrScan](https://scan.bohr.life/address/0xeAF13A23013d0D541f2De76625F562Ca858Fe7D4) |
+| Parameter | Value |
+| :--- | :--- |
+| **Network Name** | BOT Chain |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | [https://rpc.botchain.ai](https://rpc.botchain.ai) |
+| **Native Token** | BOT |
+| **Official Website** | [https://botchain.ai](https://botchain.ai) |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
+
+---
+
+## 📍 Deployed & Verified Contracts (BOT Chain - Chain ID: 677)
+
+| Contract | Address | Verification Status | Explorer Link |
+| :--- | :--- | :--- | :--- |
+| **AllowanceGuard** | `0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF` | **Verified** ✅ | [View Verified Code on BotScan](https://scan.botchain.ai/address/0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF#code) |
 
 ---
 
@@ -50,14 +62,14 @@
 
 1. **Smart Contracts (`contracts/`)**:
    - `AllowanceGuard.sol`: Core contract managing state-changing audit checks and batch queries.
-   - `MockERC20.sol`: Testnet ERC-20 token for live approval demonstrations.
+   - Deployed and verified on BOT Chain Mainnet.
    - Hardhat test suite with 100% test pass rate.
 
 2. **Frontend (`frontend/`)**:
-   - Built on Next.js 16 with Turbopack and React 19.
+   - Built on Next.js with Turbopack and React 19.
    - Web3 connectivity via `@reown/appkit`, `@reown/appkit-adapter-wagmi`, and `viem`.
-   - Gas-enforced allowance checking with live status feedback.
-   - 1-click revocation flow directly to ERC-20 token contracts.
+   - Small gas fee optimization for BOT Chain.
+   - Visible clickable links to [https://botchain.ai](https://botchain.ai) and [https://scan.botchain.ai](https://scan.botchain.ai) with official BOT Chain logo.
 
 ---
 
@@ -67,11 +79,11 @@
 Configure your keys in `.env.local` (kept private, git-ignored):
 ```env
 PRIVATE_KEY=your_private_key_here
-PROJECT_ID=your_reown_project_id_here
-RPC_URL=https://rpc.bohr.life
-CHAIN_ID=968
-EXPLORER_URL=https://scan.bohr.life
-CONTRACT_ADDRESS=0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03
+PROJECT_ID=d9690df1851903b53a4f8c440127edec
+RPC_URL=https://rpc.botchain.ai
+CHAIN_ID=677
+EXPLORER_URL=https://scan.botchain.ai
+CONTRACT_ADDRESS=0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF
 ```
 
 ### 2. Run Smart Contract Tests

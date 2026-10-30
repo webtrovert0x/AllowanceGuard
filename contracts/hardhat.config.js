@@ -23,6 +23,12 @@ module.exports = {
     },
   },
   networks: {
+    botchain: {
+      url: process.env.BOTCHAIN_RPC_URL || "https://rpc.botchain.ai",
+      chainId: 677,
+      accounts: accounts,
+      gasPrice: 20000000000, // 20 Gwei (small, standard gas fee)
+    },
     bohr: {
       url: process.env.BOHR_RPC_URL || "https://rpc.bohr.life",
       chainId: 968,
@@ -31,5 +37,23 @@ module.exports = {
     hardhat: {
       chainId: 31337,
     },
+  },
+  etherscan: {
+    apiKey: {
+      botchain: "botchain",
+    },
+    customChains: [
+      {
+        network: "botchain",
+        chainId: 677,
+        urls: {
+          apiURL: "https://scan.botchain.ai/api",
+          browserURL: "https://scan.botchain.ai",
+        },
+      },
+    ],
+  },
+  sourcify: {
+    enabled: false,
   },
 };

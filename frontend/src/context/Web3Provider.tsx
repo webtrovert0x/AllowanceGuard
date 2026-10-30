@@ -5,22 +5,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, cookieToInitialState } from "wagmi";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { bohrTestnet } from "@/config/bohr";
+import { botchain } from "@/config/botchain";
 
 // Project ID from .env.local (mapped safely through next.config)
-export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || "37af4e98e17e490d8ae7817b4dadf3d1";
+export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || "d9690df1851903b53a4f8c440127edec";
 
 // Metadata for Reown AppKit
 const metadata = {
   name: "AllowanceGuard",
-  description: "Token approval checker and revoke utility for Bohr Testnet",
+  description: "Token approval checker and revoke utility for BOT Chain",
   url: "https://allowanceguard.local",
-  icons: ["https://avatars.githubusercontent.com/u/179229932"],
+  icons: ["https://botchain.ai/logo.png"],
 };
 
-// Wagmi Adapter with Bohr Testnet
+// Wagmi Adapter with BOT Chain
 export const wagmiAdapter = new WagmiAdapter({
-  networks: [bohrTestnet],
+  networks: [botchain],
   projectId,
   ssr: true,
 });
@@ -28,7 +28,7 @@ export const wagmiAdapter = new WagmiAdapter({
 // Initialize Reown AppKit modal
 createAppKit({
   adapters: [wagmiAdapter],
-  networks: [bohrTestnet],
+  networks: [botchain],
   projectId,
   metadata,
   themeMode: "dark",

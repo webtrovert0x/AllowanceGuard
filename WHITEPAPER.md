@@ -1,9 +1,9 @@
 # AllowanceGuard Whitepaper
 ### Decentralized Token Approval Auditing & Risk Mitigation Protocol
 **Version:** 1.0.0  
-**Target Network:** Bohr Network (Chain ID: 968)  
-**Smart Contract:** `0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03`  
-**Protocol Status:** Live on Bohr Testnet  
+**Target Network:** BOT Chain (Chain ID: 677)  
+**Smart Contract:** `0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF`  
+**Protocol Status:** Live & Verified on BOT Chain Mainnet  
 
 ---
 
@@ -142,19 +142,20 @@ struct TokenDetails {
 
 ---
 
-## 4. Bohr Network Deployment Parameters
+## 4. BOT Chain Deployment Parameters
 
-AllowanceGuard is deployed and verified on the **Bohr Testnet**:
+AllowanceGuard is deployed and verified on the **BOT Chain Mainnet**:
 
 | Parameter | Value |
 | :--- | :--- |
-| **Network Name** | Bohr Testnet |
-| **Chain ID** | `968` |
+| **Network Name** | BOT Chain |
+| **Chain ID** | `677` |
 | **Native Currency** | BOT (18 Decimals) |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life` |
-| **AllowanceGuard Address** | `0xa2dE1360664eCfA02eb0Dd4B35281bd64A871f03` |
-| **MockERC20 (BGUSD) Address** | `0xeAF13A23013d0D541f2De76625F562Ca858Fe7D4` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
+| **Official Website** | [https://botchain.ai](https://botchain.ai) |
+| **AllowanceGuard Address** | `0xA17E767F0E6b4A2B0A58046CaFede7ed92be82AF` |
+| **Verification Status** | Verified on BotScan ✅ |
 
 ---
 

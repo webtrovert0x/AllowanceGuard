@@ -24,14 +24,16 @@ async function main() {
 
   // Deploy AllowanceGuard
   const AllowanceGuard = await ethers.getContractFactory("AllowanceGuard");
-  console.log("Deploying AllowanceGuard...");
-  const guard = await AllowanceGuard.deploy();
+  console.log("Deploying AllowanceGuard with small gas fee (20 Gwei)...");
+  const guard = await AllowanceGuard.deploy({
+    gasPrice: 20000000000n, // 20 Gwei small gas fee
+  });
   await guard.waitForDeployment();
 
   const guardAddress = await guard.getAddress();
   console.log(" AllowanceGuard deployed successfully!");
   console.log(" Contract Address:", guardAddress);
-  console.log(" Bohr Explorer:", `https://scan.bohr.life/address/${guardAddress}`);
+  console.log(" BOT Chain Explorer:", `https://scan.botchain.ai/address/${guardAddress}`);
 
   // Deploy MockERC20 test token if requested
   const deployMock = process.env.DEPLOY_MOCK === "true";
